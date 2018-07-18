@@ -1,0 +1,32 @@
+@import url('//cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css');
+
+.clock {
+    align-items: center;
+    text-align: center;
+    width: 20%;
+    position: relative;
+    left: 50%;
+    margin-left: -10%;
+    margin-top: 40px; 
+}
+
+.time {
+    font-family: 'NanumSquareRound', sans-serif;
+    font-weight: 300;
+    font-size: 38pt;
+    display: block;
+    margin: 0 auto;
+}
+
+.day {
+    font-family: 'NanumSquareRound', sans-serif;
+    font-weight: 300;
+    font-size: 14pt;
+}
+.fuck {
+    position: absolute;
+    left: 78px;
+    z-index: 2;
+    color: rgb(255, 183, 0);
+    
+}
