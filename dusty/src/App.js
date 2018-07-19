@@ -4,6 +4,8 @@ import moment from 'moment';
 import Dustytemplate from './Component/Dustytemplate';
 import Dustytime from './Component/Dustytime';
 import Dustymorning from './Component/Dustymorning';
+import Dustyweather from './Component/Dustyweather';
+import Concentration from './Component/Concentration';
 
 //{'h': 30, 't': 30, 'd': 30}
 
@@ -12,50 +14,60 @@ class App extends Component {
   state = {
     day : moment().format('YYYY/MM/DD'),
     time : moment().format('hh:mm'),
-    morning : this.PA
+    morning : `아침운동있음`,
+    morningApi : ``,
+    morningSer : ``,
+    weather : `오늘날씨맑음`,
+    density : `00 / mph`,
+    emotion : `좋음`,
   }
 
-  PA = () => {
-    let po;
-    let po2;
-    var YN = axios.get(`http://10.156.147.195:86`)
+  // 아침운동 유무
+  MorningFn = () => {
+
+    var YN = axios.get(`URL`)
       .then(res => {
-        const YN = res.data.d;
-        YN = Number();
-        if(YN < 36){
-          po = `아침운동${<span className="or">있음</span>}`
+        let cYN = res.data.d;
+        cYN = Number(cYN);
+        if(cYN < 36){
+          this.setState({morningSer : `아침운동있음`})
         } else {
-          po = `아침운동${<span className="or">없음</span>}`
+          this.setState({morningSer : `아침운동없음`})
         }
       })
 
     var WE = axios.get(`https://api2.sktelecom.com/weather/current/minutely?version=1&lat=36.35111&lon=127.38500&appKey=d9880ad1-c2ab-46b8-b7be-082577b23600`)
     .then(res => {
-      const WE = res.data.weather.minutely[0].sky.name;
+      let cWE = res.data.weather.minutely[0].sky.name;
 
-      if(WE === '맑음' || WE === '구름조금' || WE === `구름많음`) {
-        po2 = `아침운동${<span className="or">있음</span>}`
+      if(cWE === '맑음' || cWE === '구름조금' || cWE === `구름많음`) {
+        this.setState({morningApi : `아침운동있음`})
       } else {
-        po2 = `아침운동${<span className="or">없음</span>}`
+        this.setState({morningApi : `아침운동없음`})
       }
-    })
-    if(YN.po === `아침운동있음` && WE.po2 === `아침운동있음`) {
+
+    if(this.state.morningSer === `아침운동있음` && this.state.morningApi === `아침운동있음`) {
       this.setState({
-        morning : `아침운동${<span className="or">있음</span>}`
+        morning : `아침운동있음`
       })
     } else {
       this.setState({
-        morning : `아침운동${<span className="or">없음</span>}`
+        morning : `아침운동없음`
       })
     }
+  })
   }
 
+  // 클릭 함수
   onClick = () => {
 
     const day = moment().format('YYYY/MM/DD');
     const time = moment().format('hh:mm');
 
-    this.PA
+    this.MorningFn()
+    this.WeatherFn()
+    this.ConFn()
+    this.DenFn()
 
     this.setState({
       day : day,
@@ -74,11 +86,19 @@ class App extends Component {
           />}
         
         morning = {<Dustymorning
-            morning = {this.PA}
-            //weather = {}
+            morning = {this.state.morning}
           />}
 
-        //weather = {}
+        weather = {<Dustyweather
+          weather = {this.state.weather}
+        />}
+
+        dustyConcentration = {<Concentration
+          density = {this.state.density}
+          emotion = {this.state.emotion}
+        />}
+
+        
       />
     );
   }
