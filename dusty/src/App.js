@@ -58,6 +58,37 @@ class App extends Component {
   })
   }
 
+  // 날씨
+  WeatherFn = () => {
+    axios.get(`https://api2.sktelecom.com/weather/current/minutely?version=1&lat=36.35111&lon=127.38500&appKey=d9880ad1-c2ab-46b8-b7be-082577b23600`)
+    .then(res => {
+      let cWt = res.data.weather.minutely[0].sky.name;
+
+      if(cWt === '비') {
+        this.setState({
+          weather : "오늘날씨비" // 비
+        })
+      } else if(cWt === '눈') {
+        this.setState({
+          weather : "오늘날씨눈" // 눈
+        })
+      } else if(cWt === '맑음') {
+        this.setState({
+          weather : "오늘날씨맑음" // 태양
+        })
+      } else if(cWt === '구름조금') {
+        this.setState({
+          weather : "오늘날씨구름 조금" // 구름조금
+        })
+      } else if(cWt === '구름많음') {
+        this.setState({
+          weather : "오늘날씨구름 많음" // 구름조금
+        })
+      }
+    })
+  }
+
+
   // 클릭 함수
   onClick = () => {
 
