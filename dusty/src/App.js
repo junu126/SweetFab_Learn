@@ -88,6 +88,25 @@ class App extends Component {
     })
   }
 
+  // 성격
+  ConFn = () => {
+    axios.get('URL')
+    .then(res => {
+      let cCon = res.data.d;
+      cCon = Number(cCon);
+
+      if(cCon >= 0 && cCon < 16 )
+        this.setState({emotion : `좋음`})
+      else if(cCon >= 16 && cCon < 35)
+        this.setState({emotion : `보통`})
+      else if(cCon >= 36 && cCon < 75)
+        this.setState({emotion : `나쁨`})
+      else
+        this.setState({emotion : `매우나쁨`})
+    })
+  }
+
+
 
   // 클릭 함수
   onClick = () => {
