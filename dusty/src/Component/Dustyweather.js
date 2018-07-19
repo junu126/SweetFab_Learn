@@ -1,8 +1,9 @@
 import React from 'react';
+import './Dustyweather.css';
 
 const Dustyweather = ({weather}) => {
     return (
-        <div>
+        <div className="d-weather">
             {weather}
         </div>
     );
