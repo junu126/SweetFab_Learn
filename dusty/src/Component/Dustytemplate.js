@@ -9,20 +9,20 @@ const Dustytemplate = ({change, time, morning, weather, dustyConcentration, onof
             <div className="border-top-left"></div>
             <div className="border-top-right"></div>
             <img className="icon" alt="Icon" onClick={change} src={Icon}/>
-            <section>
+            <section className="tem-time">
                 {time}
             </section>
-            <section>
+            <section className="tem-morning">
                 {morning}
             </section>
-            <section>
+            <section className="tem-weather">
                 {weather}
             </section>
             <img className="logo" alt="Logo" src={Logo}/>
-            <section>
+            <section className="tem-con">
                 {dustyConcentration}
             </section>
-            <section>
+            <section className="tem-time">
                 {onoff}
             </section>
         </main>
