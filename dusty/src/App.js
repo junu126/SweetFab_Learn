@@ -6,6 +6,7 @@ import Dustytime from './Component/Dustytime';
 import Dustymorning from './Component/Dustymorning';
 import Dustyweather from './Component/Dustyweather';
 import Concentration from './Component/Concentration';
+import Onoff from './Component/Onoff';
 
 //{'h': 30, 't': 30, 'd': 30}
 
@@ -20,6 +21,22 @@ class App extends Component {
     weather : `오늘날씨맑음`,
     density : `00 / mph`,
     emotion : `좋음`,
+    ball : `ball-off`,
+    turn : `OFF`
+  }
+
+  // Turn
+  Turnonoff = () => {
+    axios.get('URL')
+    .then(res => {
+      const cTn = res.data.d;
+      if(cTn === true){
+        this.setState({
+          turn : `ON`,
+          ball : `ball-on`
+        })
+      }
+    })
   }
 
   // 아침운동 유무
@@ -125,6 +142,7 @@ class App extends Component {
     const day = moment().format('YYYY/MM/DD');
     const time = moment().format('hh:mm');
 
+    this.Turnonoff()
     this.MorningFn()
     this.WeatherFn()
     this.ConFn()
@@ -159,7 +177,10 @@ class App extends Component {
           emotion = {this.state.emotion}
         />}
 
-        
+        onoff = {<Onoff
+          ball = {this.state.ball}
+          turn = {this.state.turn}
+        />}
       />
     );
   }
