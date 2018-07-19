@@ -106,7 +106,18 @@ class App extends Component {
     })
   }
 
+  // 수치
+  DenFn = () => {
+    axios.get('URL')
+    .then(res => {
+      let cDen = res.data.d;
+      cDen = Number(cDen);
 
+      this.setState({
+        density : `${cDen} / mph`
+      })
+    })
+  }
 
   // 클릭 함수
   onClick = () => {
