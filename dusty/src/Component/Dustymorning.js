@@ -3,7 +3,7 @@ import './Dustymorning.css';
 
 const Dustymorning = ({morning}) => {
     return (
-        <div className="d-morning">
+        <div className="d-morning" >
             {morning}
         </div>
     );
